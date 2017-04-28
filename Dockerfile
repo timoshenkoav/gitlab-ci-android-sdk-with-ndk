@@ -1,5 +1,5 @@
 FROM ubuntu:15.04
-MAINTAINER yewenju <wuyougan@163.com>
+MAINTAINER alex <thick.tav@gmail.com>
 
 ENV ANDROID_HOME /opt/android-sdk-linux
 ENV ANDROID_NDK_HOME /opt/android-ndk-r13b
