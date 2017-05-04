@@ -41,13 +41,13 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:${ANDROID_
 
 # 更新 SDK
 RUN echo y | android update sdk --no-ui --all --filter \
-  build-tools-25.0.2,build-tools-25.0.1,build-tools-25.0.0,build-tools-24.0.3,build-tools-24.0.2,build-tools-24.0.1,build-tools-24.0.0,build-tools-23.0.3,build-tools-23.0.2,build-tools-23.0.1,build-tools-22.0.1,build-tools-21.1.2,build-tools-20.0.0,build-tools-19.1.0
+  build-tools-25.0.2
 
 RUN echo y | android update sdk --no-ui --all --filter \
-  android-25,android-24,android-23,android-22,android-21,android-20,android-19,android-17,android-15
+  android-25
 
 RUN echo y | android update sdk --no-ui --all --filter \
-  addon-google_apis-google-24,addon-google_apis-google-23,addon-google_apis-google-22,addon-google_apis-google-21,addon-google_apis-google-19,addon-google_apis-google-17,addon-google_apis-google-15
+  addon-google_apis-google-24
 
 RUN echo y | android update sdk --no-ui --all --filter \
   platform-tools,extra-android-m2repository,extra-android-support,extra-google-google_play_services,extra-google-m2repository
@@ -61,7 +61,9 @@ COPY gradle/ /opt/
 #   https://bintray.com/android/android-tools/com.android.tools.build.gradle#files/com/android/tools/build/gradle
 RUN cd /opt && \
     chmod +x gradlew && \
-    bash ./gradle_install.sh 3.3 3.2.1 3.2 3.1 3.0 2.14.1 2.14 2.13 2.12 2.11 && \
-    bash ./gradle_plugin.sh 2.2.3 2.2.2 2.2.1 2.2.0 2.1.3 2.1.2 2.1.0 2.0.0 && \
+    bash ./gradle_install.sh 3.3 && \
+    bash ./gradle_plugin.sh 2.3.1 && \
     rm -rf gradle_install.sh gradle_plugin.sh build.gradle gradlew gradle/wrapper/gradle-wrapper.{jar,properties}
+RUN wget "https://www.dropbox.com/s/q88bhd199zbjc69/licenses.zip?dl=1" -O ${ANDROID_HOME}/license.zip    
+RUN cd ${ANDROID_HOME} && unzip -q -u license.zip
 
