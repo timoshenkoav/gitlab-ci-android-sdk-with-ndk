@@ -30,13 +30,6 @@ RUN cd /opt && \
     unzip android-ndk.zip && \
     rm -f android-sdk.tgz android-ndk.zip
 
-# 安装 CMake
-RUN mkdir -p ${ANDROID_HOME}/cmake && \
-    cd ${ANDROID_HOME}/cmake && \
-    curl -s https://dl.google.com/android/repository/cmake-3.6.3155560-linux-x86_64.zip > cmake.zip && \
-    unzip cmake.zip && \
-    rm -f cmake.zip
-
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:${ANDROID_NDK_HOME}
 
 # 更新 SDK
