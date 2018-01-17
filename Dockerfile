@@ -33,7 +33,7 @@ RUN cd /opt && \
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${ANDROID_NDK_HOME}
 
 # 更新 SDK
-RUN yes | sdkmanager "platform-tools" "platforms;android-26" "platforms;android-27" "extras;android;m2repository" \
+RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "platform-tools" "platforms;android-26" "platforms;android-27" "extras;android;m2repository" \
     "extras;google;google_play_services" "build-tools;26.0.2" 
 
 # 安装 gradle
