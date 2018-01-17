@@ -24,8 +24,9 @@ RUN apt-get update -qq && \
 
 # 安装 SDK
 RUN cd /opt && \
+    mkdir ${ANDROID_HOME} && \
     curl -s https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip > android-sdk.zip && \
-    unzip android-sdk.zip && \
+    unzip android-sdk.zip -d ${ANDROID_HOME} && \
     curl -s https://dl.google.com/android/repository/android-ndk-r13b-linux-x86_64.zip > android-ndk.zip && \
     unzip android-ndk.zip && \
     rm -f android-sdk.tgz android-ndk.zip
