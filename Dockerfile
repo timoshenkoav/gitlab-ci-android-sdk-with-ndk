@@ -33,26 +33,8 @@ RUN cd /opt && \
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${ANDROID_NDK_HOME}
 
 # 更新 SDK
-RUN yes | android update sdk --no-ui --all --filter \
-  build-tools-25.0.2
-
-RUN yes | android update sdk --no-ui --all --filter \
-  build-tools-26.0.2
-  
-RUN yes | android update sdk --no-ui --all --filter \
-  android-25
-
-RUN yes | android update sdk --no-ui --all --filter \
-  android-26
-  
-RUN yes | android update sdk --no-ui --all --filter \
-  android-27  
-
-RUN yes | android update sdk --no-ui --all --filter \
-  addon-google_apis-google-24
-
-RUN yes | android update sdk --no-ui --all --filter \
-  platform-tools,extra-android-m2repository,extra-android-support,extra-google-google_play_services,extra-google-m2repository
+RUN yes | sdkmanager "platform-tools" "platforms;android-26" "platforms;android-27" "extras;android;m2repository" \
+    "extras;google;google_play_services" "build-tools;26.0.2" 
 
 # 安装 gradle
 COPY gradle/ /opt/
@@ -66,6 +48,4 @@ RUN cd /opt && \
     bash ./gradle_install.sh 3.3 && \
     bash ./gradle_plugin.sh 2.3.1 && \
     rm -rf gradle_install.sh gradle_plugin.sh build.gradle gradlew gradle/wrapper/gradle-wrapper.{jar,properties}
-RUN wget "https://www.dropbox.com/s/q88bhd199zbjc69/licenses.zip?dl=1" -O ${ANDROID_HOME}/license.zip    
-RUN cd ${ANDROID_HOME} && unzip -q -u license.zip
 
