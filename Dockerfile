@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM openjdk:8-jdk
 MAINTAINER alex <thick.tav@gmail.com>
 
 ENV ANDROID_HOME /opt/android-sdk-linux
