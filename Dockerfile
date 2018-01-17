@@ -24,25 +24,34 @@ RUN apt-get update -qq && \
 
 # 安装 SDK
 RUN cd /opt && \
-    curl -s https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz > android-sdk.tgz && \
+    curl -s https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip > android-sdk.tgz && \
     tar -xvzf android-sdk.tgz && \
     curl -s https://dl.google.com/android/repository/android-ndk-r13b-linux-x86_64.zip > android-ndk.zip && \
     unzip android-ndk.zip && \
     rm -f android-sdk.tgz android-ndk.zip
 
-ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:${ANDROID_NDK_HOME}
+ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${ANDROID_NDK_HOME}
 
 # 更新 SDK
-RUN echo y | android update sdk --no-ui --all --filter \
+RUN yes | android update sdk --no-ui --all --filter \
   build-tools-25.0.2
 
-RUN echo y | android update sdk --no-ui --all --filter \
+RUN yes | android update sdk --no-ui --all --filter \
+  build-tools-26.0.2
+  
+RUN yes | android update sdk --no-ui --all --filter \
   android-25
 
-RUN echo y | android update sdk --no-ui --all --filter \
+RUN yes | android update sdk --no-ui --all --filter \
+  android-26
+  
+RUN yes | android update sdk --no-ui --all --filter \
+  android-27  
+
+RUN yes | android update sdk --no-ui --all --filter \
   addon-google_apis-google-24
 
-RUN echo y | android update sdk --no-ui --all --filter \
+RUN yes | android update sdk --no-ui --all --filter \
   platform-tools,extra-android-m2repository,extra-android-support,extra-google-google_play_services,extra-google-m2repository
 
 # 安装 gradle
