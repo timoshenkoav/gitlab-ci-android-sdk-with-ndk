@@ -2,7 +2,7 @@ FROM openjdk:8-jdk
 MAINTAINER alex <thick.tav@gmail.com>
 
 ENV ANDROID_HOME /opt/android-sdk-linux
-ENV ANDROID_NDK_HOME /opt/android-ndk-r13b
+ENV ANDROID_NDK_HOME /opt/android-ndk-r17c
 ENV GRADLE_USER_HOME /opt/gradle
 
 # 更换 Ubuntu 镜像更新地址
@@ -27,7 +27,7 @@ RUN cd /opt && \
     mkdir ${ANDROID_HOME} && \
     curl -s https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip > android-sdk.zip && \
     unzip android-sdk.zip -d ${ANDROID_HOME} && \
-    curl -s https://dl.google.com/android/repository/android-ndk-r13b-linux-x86_64.zip > android-ndk.zip && \
+    curl -s https://dl.google.com/android/repository/android-ndk-r17c-linux-x86_64.zip > android-ndk.zip && \
     unzip android-ndk.zip && \
     rm -f android-sdk.tgz android-ndk.zip
 
@@ -35,7 +35,7 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}
 
 # 更新 SDK
 RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager "platform-tools" "platforms;android-26" "platforms;android-27" "extras;android;m2repository" \
-    "extras;google;google_play_services" "build-tools;26.0.2" 
+    "extras;google;google_play_services" "build-tools;27.0.2" 
 
 # 安装 gradle
 COPY gradle/ /opt/
