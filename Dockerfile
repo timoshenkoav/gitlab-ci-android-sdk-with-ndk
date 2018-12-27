@@ -19,7 +19,7 @@ ENV GRADLE_USER_HOME /opt/gradle
 
 # 安装基础包
 RUN apt-get update -qq && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget unzip libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1 && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y curl wget unzip zip libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1 && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # 安装 SDK
